@@ -14,7 +14,7 @@ df_2022 = None
 
 print("--- Tentando carregar dados do Excel ---")
 
-# Carregar os dados de 2024
+
 try:
     df_2024 = pd.read_excel(
         ID_ARQUIVO_EXCEL,
@@ -33,7 +33,7 @@ except ValueError:
 
 
 
-# Carregar os dados de 2022
+
 try:
     df_2022 = pd.read_excel(
         ID_ARQUIVO_EXCEL,

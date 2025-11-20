@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard de Escolaridade por Linguagem (2018-2024)</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    
+    <style>
+        /* CSS para Estilização */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background-color: #f8f9fa; color: #333; }
+        .container { max-width: 1400px; margin: 40px auto; padding: 20px; background: white; border-radius: 12px; box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
+        h1, h2, h3 { color: #007bff; text-align: center; }
+        
+        /* Controles */
+        .controls { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; }
+        .controls button { padding: 10px 20px; font-size: 16px; border: none; border-radius: 8px; cursor: pointer; transition: all 0.3s; background-color: #e9ecef; }
+        .controls button.active { background-color: #007bff; color: white; box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3); }
+        .controls button:hover:not(.active) { background-color: #dee2e6; }
+        
+        /* Área do Gráfico */
+        .chart-area { 
+            border: 1px solid #dee2e6; 
+            padding: 20px; 
+            border-radius: 8px; 
+            background-color: #fff;
+            min-height: 600px; 
+            margin-bottom: 40px; /* Adiciona espaço antes do relatório */
+        }
+        
+        /* Estilos do Relatório */
+        .report-section {
+            padding: 20px;
+            border-top: 2px solid #007bff; /* Linha de separação */
+        }
+
+        .report-section h3 {
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+            margin-top: 30px;
+            text-align: left;
+            color: #333;
+        }
+
+        /* Estilo da Tabela de Ranking */
+        .ranking-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        .ranking-table th, .ranking-table td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: center;
+        }
+        .ranking-table th {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+        .ranking-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .ranking-table td:first-child {
+            font-weight: bold;
+            background-color: #e9ecef;
+            color: #007bff;
+        }
+        
+        /* Estilos de destaque para anomalias */
+        .anomaly {
+            background-color: #fff3cd; 
+            border-left: 5px solid #ffc107; 
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 4px;
+        }
+        .anomaly strong {
+            color: #856404;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Contagem de Desenvolvedores por Escolaridade e Linguagem (2018-2024)</h1>
+
+        <h2>Selecione a Linguagem para Análise:</h2>
+        <div class="controls" id="language-controls">
+            </div>
+
+        <div class="chart-area">
+            <canvas id="stackedBarChart"></canvas>
+        </div>
+
+        <div id="report-section" class="report-section">
+            <h2 style="text-align: left;">Relatório de Análise de Tendências (2018 - 2024)</h2>
+            <p>Com base nos dados anuais de contagem por nível de escolaridade, a análise a seguir resume as tendências de popularidade das linguagens de programação no período.</p>
+
+            <h3>1. Classificação Geral por Ano</h3>
+            <p>A tabela abaixo apresenta o ranking de popularidade das linguagens com base na contagem total de desenvolvedores por ano:</p>
+            <table class="ranking-table">
+                <thead>
+                    <tr>
+                        <th>Posição</th>
+                        <th>2018</th>
+                        <th>2020</th>
+                        <th>2022</th>
+                        <th>2024</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>1º</strong></td><td>HTML/CSS</td><td><strong>JavaScript</strong></td><td><strong>JavaScript</strong></td><td><strong>JavaScript</strong></td></tr>
+                    <tr><td><strong>2º</strong></td><td>JavaScript</td><td>HTML/CSS</td><td>HTML/CSS</td><td>SQL</td></tr>
+                    <tr><td><strong>3º</strong></td><td>SQL</td><td>SQL</td><td>SQL</td><td>HTML/CSS</td></tr>
+                    <tr><td><strong>4º</strong></td><td>Java</td><td>Python</td><td>Python</td><td>Python</td></tr>
+                    <tr><td><strong>5º</strong></td><td>Python</td><td>Java</td><td>Java</td><td>Bash/Shell</td></tr>
+                    <tr><td><strong>6º</strong></td><td>Bash/Shell</td><td>Bash/Shell</td><td>Bash/Shell</td><td>Java</td></tr>
+                    <tr><td><strong>7º</strong></td><td>C#</td><td>C#</td><td>C#</td><td>C#</td></tr>
+                    <tr><td><strong>8º</strong></td><td>PHP</td><td>PHP</td><td>C++</td><td>C++</td></tr>
+                    <tr><td><strong>9º</strong></td><td>C++</td><td>C++</td><td>PHP</td><td>PHP</td></tr>
+                </tbody>
+            </table>
+
+            <h3>2. Tendências e Destaques</h3>
+            <ul>
+                <li><strong>JavaScript:</strong> Assumiu a liderança em 2020 e manteve-se consistentemente na <strong>1ª posição</strong> até 2024, consolidando-se como a linguagem mais utilizada.</li>
+                <li><strong>HTML/CSS:</strong> Perdeu a liderança de 2018 e caiu para a 3ª posição em 2024. Notavelmente, a contagem de usuários <strong>diminuiu drasticamente</strong> (de 102.450 em 2018 para 30.419 em 2024), sugerindo uma possível mudança na forma como as pesquisas consideram desenvolvedores front-end puros, ou uma forte redução na amostra.</li>
+                <li><strong>Python:</strong> Apresentou uma tendência de alta no ranking, subindo da 5ª para a 4ª posição. Foi a única entre as líderes a registrar um <strong>crescimento no total de usuários</strong> entre 2018 e 2022 (de 29.857 para 33.541), demonstrando sua crescente popularidade.</li>
+                <li><strong>SQL:</strong> Manteve-se estável em 3º lugar de 2018 a 2022, mas subiu para a <strong>2ª posição</strong> em 2024, reforçando sua importância contínua na área de dados.</li>
+                <li><strong>PHP e Java:</strong> Ambas as linguagens registraram quedas nas contagens totais e posições no ranking ao longo do período, com PHP caindo para o último lugar em 2022.</li>
+                <li><strong>C++:</strong> Demonstrou uma ligeira ascensão na parte inferior do ranking, subindo da 9ª posição em 2018 para a 8ª em 2022.</li>
+            </ul>
+
+            <h3>3. Observações Críticas (Anomalias)</h3>
+            <div class="anomaly">
+                <strong>⚠️ Alerta de Integridade dos Dados:</strong>
+                <p>O conjunto de dados apresenta anomalias significativas que devem ser consideradas ao interpretar os gráficos, pois indicam possíveis falhas na coleta ou filtragem:</p>
+                <ul>
+                    <li><strong>PHP em 2024:</strong> A linguagem <strong>PHP</strong> registra <strong>zero (0)</strong> contagens em <em>todos</em> os níveis de escolaridade para o ano de 2024. Isso sugere que os dados de PHP foram completamente excluídos ou não foram capturados para este ano.</li>
+                    <li><strong>Nível de Escolaridade Ausente (2022 e 2024):</strong> A categoria <strong>"I never completed any formal education"</strong> registra <strong>zero (0)</strong> contagens para <em>todas</em> as linguagens em 2022 e 2024. Isso contrasta com os anos anteriores (2018 e 2020) e aponta para a exclusão deste nível nos anos mais recentes.</li>
+                    <li><strong>Redução na Amostra:</strong> A contagem total de participantes para a maioria das linguagens sofreu uma <strong>redução drástica</strong> a partir de 2020. Essa queda generalizada sugere uma forte diminuição no número total de respondentes da pesquisa de um ano para o outro, o que afeta a magnitude das barras do gráfico.</li>
+                </ul>
+            </div>
+        </div>
+        </div>
+
+    <script>
+        // REGISTRA O PLUGIN datalabels
+        Chart.register(ChartDataLabels);
+
+        // O código JavaScript aqui deve ser o mesmo que você usou na última iteração para o gráfico
+        // ... (Mantenha o JS da iteração anterior, que contém fetchData, setupControls e renderChart) ...
+        const API_URL = './data_dashboard.json'; 
+        const CHART_COLORS = [
+            '#007bff', '#28a745', '#ffc107', '#dc3545', '#17a2b8', '#6610f2', '#fd7e14', '#e83e8c', '#6c757d'
+        ];
+        
+        let allData = null;
+        let chartInstance = null;
+        let currentLanguage = 'JavaScript'; // Linguagem inicial
+
+        // Função para buscar e processar os dados JSON
+        async function fetchData() {
+            try {
+                // Como você forneceu o JSON no prompt, vamos injetá-lo diretamente
+                const json_data = {
+                    "labels": [
+                        "Bachelor\u2019s degree (BA, BS, B.Eng., etc.)",
+                        "Master\u2019s degree (MA, MS, M.Eng., MBA, etc.)",
+                        "Some college/university study without earning a degree",
+                        "Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)",
+                        "Associate degree (A.A., A.S., etc.)",
+                        "Other doctoral degree (Ph.D, Ed.D., etc.)",
+                        "Primary/elementary school",
+                        "Professional degree (JD, MD, etc.)",
+                        "I never completed any formal education"
+                    ],
+                    "yearly_count_data": {
+                        "2018": {
+                            "Bachelor\u2019s degree (BA, BS, B.Eng., etc.)": {
+                                "JavaScript": 25755, "HTML/CSS": 48368, "Python": 12751, "SQL": 20894, "Java": 16424, "Bash/Shell": 12571, "C#": 12668, "PHP": 10545, "C++": 7995
+                            },
+                            "Master\u2019s degree (MA, MS, M.Eng., MBA, etc.)": {
+                                "JavaScript": 11342, "HTML/CSS": 20949, "Python": 7198, "SQL": 9763, "Java": 8174, "Bash/Shell": 7379, "C#": 5646, "PHP": 4331, "C++": 4648
+                            },
+                            "Some college/university study without earning a degree": {
+                                "JavaScript": 7209, "HTML/CSS": 14031, "Python": 3703, "SQL": 5801, "Java": 3997, "Bash/Shell": 4225, "C#": 3473, "PHP": 3577, "C++": 2439
+                            },
+                            "Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)": {
+                                "JavaScript": 4773, "HTML/CSS": 10034, "Python": 3111, "SQL": 3672, "Java": 3413, "Bash/Shell": 2715, "C#": 2298, "PHP": 2703, "C++": 2398
+                            },
+                            "Associate degree (A.A., A.S., etc.)": {
+                                "JavaScript": 1833, "HTML/CSS": 3606, "Python": 798, "SQL": 1529, "Java": 962, "Bash/Shell": 904, "C#": 1020, "PHP": 998, "C++": 486
+                            },
+                            "Other doctoral degree (Ph.D, Ed.D., etc.)": {
+                                "JavaScript": 872, "HTML/CSS": 1696, "Python": 1213, "SQL": 870, "Java": 666, "Bash/Shell": 1013, "C#": 411, "PHP": 278, "C++": 734
+                            },
+                            "Primary/elementary school": {
+                                "JavaScript": 787, "HTML/CSS": 1696, "Python": 603, "SQL": 467, "Java": 553, "Bash/Shell": 445, "C#": 405, "PHP": 443, "C++": 383
+                            },
+                            "Professional degree (JD, MD, etc.)": {
+                                "JavaScript": 757, "HTML/CSS": 1429, "Python": 330, "SQL": 653, "Java": 499, "Bash/Shell": 378, "C#": 392, "PHP": 398, "C++": 238
+                            },
+                            "I never completed any formal education": {
+                                "JavaScript": 313, "HTML/CSS": 641, "Python": 150, "SQL": 213, "Java": 169, "Bash/Shell": 156, "C#": 140, "PHP": 197, "C++": 121
+                            }
+                        },
+                        "2020": {
+                            "Bachelor\u2019s degree (BA, BS, B.Eng., etc.)": {
+                                "JavaScript": 17308, "HTML/CSS": 15882, "Python": 10318, "SQL": 14024, "Java": 10009, "Bash/Shell": 7889, "C#": 7863, "PHP": 6178, "C++": 5267
+                            },
+                            "Master\u2019s degree (MA, MS, M.Eng., MBA, etc.)": {
+                                "JavaScript": 7525, "HTML/CSS": 6661, "Python": 5705, "SQL": 6592, "Java": 4846, "Bash/Shell": 4417, "C#": 3521, "PHP": 2485, "C++": 2921
+                            },
+                            "Some college/university study without earning a degree": {
+                                "JavaScript": 4986, "HTML/CSS": 2898, "Python": 2898, "SQL": 3897, "Java": 2574, "Bash/Shell": 2476, "C#": 2265, "PHP": 2135, "C++": 1646
+                            },
+                            "Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)": {
+                                "JavaScript": 3027, "HTML/CSS": 3160, "Python": 2271, "SQL": 2203, "Java": 2014, "Bash/Shell": 1375, "C#": 1517, "PHP": 1415, "C++": 1444
+                            },
+                            "Associate degree (A.A., A.S., etc.)": {
+                                "JavaScript": 1327, "HTML/CSS": 1257, "Python": 615, "SQL": 1064, "Java": 619, "Bash/Shell": 596, "C#": 741, "PHP": 638, "C++": 305
+                            },
+                            "Other doctoral degree (Ph.D, Ed.D., etc.)": {
+                                "JavaScript": 650, "HTML/CSS": 609, "Python": 1049, "SQL": 629, "Java": 492, "Bash/Shell": 692, "C#": 275, "PHP": 206, "C++": 550
+                            },
+                            "Primary/elementary school": {
+                                "JavaScript": 568, "HTML/CSS": 603, "Python": 484, "SQL": 302, "Java": 345, "Bash/Shell": 254, "C#": 279, "PHP": 246, "C++": 1317
+                            },
+                            "Professional degree (JD, MD, etc.)": {
+                                "JavaScript": 526, "HTML/CSS": 484, "Python": 254, "SQL": 463, "Java": 319, "Bash/Shell": 244, "C#": 258, "PHP": 270, "C++": 132
+                            },
+                            "I never completed any formal education": {
+                                "JavaScript": 278, "HTML/CSS": 259, "Python": 144, "SQL": 183, "Java": 151, "Bash/Shell": 104, "C#": 125, "PHP": 154, "C++": 103
+                            }
+                        },
+                        "2022": {
+                            "Bachelor\u2019s degree (BA, BS, B.Eng., etc.)": {
+                                "JavaScript": 20311, "HTML/CSS": 16586, "Python": 13232, "SQL": 15571, "Java": 10203, "Bash/Shell": 8133, "C#": 8659, "PHP": 6058, "C++": 5954
+                            },
+                            "Master\u2019s degree (MA, MS, M.Eng., MBA, etc.)": {
+                                "JavaScript": 8766, "HTML/CSS": 7084, "Python": 7773, "SQL": 7647, "Java": 5170, "Bash/Shell": 4816, "C#": 3916, "PHP": 2599, "C++": 3408
+                            },
+                            "Some college/university study without earning a degree": {
+                                "JavaScript": 6590, "HTML/CSS": 5631, "Python": 4219, "SQL": 4793, "Java": 2901, "Bash/Shell": 2922, "C#": 2652, "PHP": 2330, "C++": 2054
+                            },
+                            "Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)": {
+                                "JavaScript": 5478, "HTML/CSS": 5108, "Python": 4478, "SQL": 3322, "Java": 2872, "Bash/Shell": 2239, "C#": 2258, "PHP": 1825, "C++": 2483
+                            },
+                            "Associate degree (A.A., A.S., etc.)": {
+                                "JavaScript": 1614, "HTML/CSS": 1399, "Python": 867, "SQL": 1273, "Java": 703, "Bash/Shell": 615, "C#": 803, "PHP": 681, "C++": 383
+                            },
+                            "Other doctoral degree (Ph.D, Ed.D., etc.)": {
+                                "JavaScript": 838, "HTML/CSS": 721, "Python": 1495, "SQL": 787, "Java": 456, "Bash/Shell": 846, "C#": 315, "PHP": 229, "C++": 681
+                            },
+                            "Primary/elementary school": {
+                                "JavaScript": 1201, "HTML/CSS": 1146, "Python": 1069, "SQL": 527, "Java": 566, "Bash/Shell": 471, "C#": 526, "PHP": 380, "C++": 552
+                            },
+                            "Professional degree (JD, MD, etc.)": {
+                                "JavaScript": 705, "HTML/CSS": 590, "Python": 408, "SQL": 605, "Java": 334, "Bash/Shell": 248, "C#": 296, "PHP": 308, "C++": 176
+                            },
+                            "I never completed any formal education": {
+                                "JavaScript": 0, "HTML/CSS": 0, "Python": 0, "SQL": 0, "Java": 0, "Bash/Shell": 0, "C#": 0, "PHP": 0, "C++": 0
+                            }
+                        },
+                        "2024": {
+                            "Bachelor\u2019s degree (BA, BS, B.Eng., etc.)": {
+                                "JavaScript": 15664, "HTML/CSS": 12940, "Python": 11437, "SQL": 12884, "Java": 7260, "Bash/Shell": 7839, "C#": 6772, "PHP": 0, "C++": 4828
+                            },
+                            "Master\u2019s degree (MA, MS, M.Eng., MBA, etc.)": {
+                                "JavaScript": 8252, "HTML/CSS": 6660, "Python": 8002, "SQL": 7613, "Java": 4581, "Bash/Shell": 5330, "C#": 3706, "PHP": 0, "C++": 3329
+                            },
+                            "Some college/university study without earning a degree": {
+                                "JavaScript": 5074, "HTML/CSS": 4429, "Python": 3586, "SQL": 3959, "Java": 2132, "Bash/Shell": 2760, "C#": 2087, "PHP": 0, "C++": 1776
+                            },
+                            "Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)": {
+                                "JavaScript": 3797, "HTML/CSS": 3609, "Python": 3227, "SQL": 2562, "Java": 1926, "Bash/Shell": 1895, "C#": 1624, "PHP": 0, "C++": 1775
+                            },
+                            "Associate degree (A.A., A.S., etc.)": {
+                                "JavaScript": 1212, "HTML/CSS": 1082, "Python": 732, "SQL": 3959, "Java": 487, "Bash/Shell": 530, "C#": 644, "PHP": 0, "C++": 296
+                            },
+                            "Other doctoral degree (Ph.D, Ed.D., etc.)": {
+                                "JavaScript": 0, "HTML/CSS": 0, "Python": 0, "SQL": 0, "Java": 0, "Bash/Shell": 0, "C#": 0, "PHP": 0, "C++": 100
+                            },
+                            "Primary/elementary school": {
+                                "JavaScript": 722, "HTML/CSS": 702, "Python": 667, "SQL": 352, "Java": 327, "Bash/Shell": 352, "C#": 310, "PHP": 0, "C++": 359
+                            },
+                            "Professional degree (JD, MD, etc.)": {
+                                "JavaScript": 1166, "HTML/CSS": 997, "Python": 1864, "SQL": 1140, "Java": 667, "Bash/Shell": 1085, "C#": 488, "PHP": 0, "C++": 891
+                            },
+                            "I never completed any formal education": {
+                                "JavaScript": 0, "HTML/CSS": 0, "Python": 0, "SQL": 0, "Java": 0, "Bash/Shell": 0, "C#": 0, "PHP": 0, "C++": 0
+                            }
+                        }
+                    },
+                    "total_ranking_data": null,
+                    "linguagens_foco": [
+                        "JavaScript",
+                        "HTML/CSS",
+                        "Python",
+                        "SQL",
+                        "Java",
+                        "Bash/Shell",
+                        "C#",
+                        "PHP",
+                        "C++"
+                    ]
+                };
+
+                allData = json_data;
+                setupControls();
+                renderChart(currentLanguage);
+
+            } catch (error) {
+                console.error("Não foi possível buscar os dados. Verifique se o arquivo 'data_dashboard.json' está na mesma pasta do HTML.", error);
+                document.querySelector('.container').innerHTML = "<h1>Erro de Carregamento de Dados!</h1><p>Verifique o console para detalhes. Certifique-se de que o arquivo 'data_dashboard.json' está na pasta correta.</p>";
+            }
+        }
+
+        // Função para configurar os botões de seleção de linguagem (sem alterações)
+        function setupControls() {
+            const controlsDiv = document.getElementById('language-controls');
+            // Garantindo que 'yearly_count_data' não está vazio
+            const yearsData = allData.yearly_count_data;
+            if (Object.keys(yearsData).length === 0) return;
+            
+            // Pega o primeiro ano e o primeiro nível de escolaridade para obter a lista de linguagens
+            const firstYear = Object.keys(yearsData).sort()[0];
+            const firstEdLevel = Object.keys(yearsData[firstYear])[0];
+            
+            const languages = allData.linguagens_foco || Object.keys(yearsData[firstYear][firstEdLevel]); 
+            
+            controlsDiv.innerHTML = ''; // Limpa botões existentes
+            
+            languages.forEach(lang => {
+                const button = document.createElement('button');
+                button.textContent = lang;
+                button.setAttribute('data-lang', lang);
+                button.classList.add('lang-btn');
+                if (lang === currentLanguage) {
+                    button.classList.add('active');
+                }
+
+                button.addEventListener('click', () => {
+                    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    currentLanguage = lang;
+                    renderChart(currentLanguage);
+                });
+                controlsDiv.appendChild(button);
+            });
+        }
+
+        // Função principal para renderizar o gráfico
+        function renderChart(language) {
+            const ctx = document.getElementById('stackedBarChart').getContext('2d');
+            
+            const datasets = [];
+            const labels = allData.labels; // Níveis de escolaridade
+            let colorIndex = 0;
+            const yearlyTotals = []; // Array para armazenar o total por ano
+
+            const years = Object.keys(allData.yearly_count_data).sort();
+
+            // 1. Processa os dados empilhados (Níveis de Escolaridade)
+            labels.forEach((edLevel, index) => {
+                const dataPoints = [];
+                let yearIndex = 0;
+
+                years.forEach(year => {
+                    const yearlyData = allData.yearly_count_data[year]; 
+                    const count = yearlyData[edLevel] && yearlyData[edLevel][language] !== undefined 
+                                             ? yearlyData[edLevel][language] 
+                                             : 0;
+                    dataPoints.push(count);
+
+                    // Calcula o total (acumulando no primeiro dataset ou inicializando)
+                    if (yearlyTotals[yearIndex] === undefined) {
+                        yearlyTotals[yearIndex] = 0;
+                    }
+                    yearlyTotals[yearIndex] += count;
+
+                    yearIndex++;
+                });
+
+                datasets.push({
+                    label: edLevel,
+                    data: dataPoints,
+                    backgroundColor: CHART_COLORS[colorIndex % CHART_COLORS.length],
+                    borderColor: 'white',
+                    borderWidth: 1,
+                    stack: 'stack',
+                    // Desabilita os rótulos de dados (datalabels) para as barras internas
+                    datalabels: { display: false }
+                });
+                colorIndex++;
+            });
+            
+            // 2. Adiciona um Dataset Invisível para os Totais (com Rótulos)
+            datasets.push({
+                label: 'Total',
+                data: yearlyTotals,
+                backgroundColor: 'transparent',
+                borderColor: 'transparent',
+                // Configurações do datalabel para mostrar o valor total no topo
+                datalabels: {
+                    color: 'black',
+                    anchor: 'end',
+                    align: 'end',
+                    offset: 5, // Pequeno deslocamento acima da barra
+                    formatter: function(value, context) {
+                        // Formata o valor total com separador de milhares
+                        return value.toLocaleString();
+                    }
+                }
+            });
+
+
+            // 3. Configura as opções do Chart.js
+            const config = {
+                type: 'bar',
+                data: {
+                    labels: years, 
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            stacked: true,
+                            title: { display: true, text: 'Ano da Pesquisa' }
+                        },
+                        y: {
+                            stacked: true,
+                            title: { display: true, text: 'Contagem de Desenvolvedores' }, 
+                            ticks: { callback: function(value) { return value.toLocaleString(); } },
+                            // Adiciona um padding extra para os rótulos de topo
+                            afterBuildTicks: (axis) => {
+                                // Encontra o valor máximo no eixo Y (o maior total + um pouco de margem)
+                                const maxTotal = Math.max(...yearlyTotals);
+                                axis.max = maxTotal * 1.15; // Aumenta o eixo Y em 15% para caber o rótulo
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: { display: true, text: `Contagem de Desenvolvedores para ${language}` },
+                        // Tooltip (para aparecer apenas na cor focada)
+                        tooltip: { 
+                            mode: 'nearest', 
+                            intersect: true,
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || ''; 
+                                    if (label && label !== 'Total') { // Não mostra o rótulo do dataset "Total"
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        return label + context.parsed.y.toLocaleString();
+                                    }
+                                    return null;
+                                }
+                            }
+                        },
+                        // Configurações globais do datalabels (o plugin)
+                        datalabels: {
+                            // Configuração padrão: visível
+                        }
+                    }
+                }
+            };
+
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            chartInstance = new Chart(ctx, config);
+        }
+
+        // Inicia o carregamento dos dados
+        fetchData();
+    </script>
+</body>
+</html>

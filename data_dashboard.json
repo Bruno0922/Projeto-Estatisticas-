@@ -1,0 +1,432 @@
+{
+    "labels": [
+        "Bachelor’s degree (BA, BS, B.Eng., etc.)",
+        "Master’s degree (MA, MS, M.Eng., MBA, etc.)",
+        "Some college/university study without earning a degree",
+        "Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)",
+        "Associate degree (A.A., A.S., etc.)",
+        "Other doctoral degree (Ph.D, Ed.D., etc.)",
+        "Primary/elementary school",
+        "Professional degree (JD, MD, etc.)",
+        "I never completed any formal education"
+    ],
+    "yearly_count_data": {
+        "2018": {
+            "Bachelor’s degree (BA, BS, B.Eng., etc.)": {
+                "JavaScript": 25755,
+                "HTML/CSS": 48368,
+                "Python": 12751,
+                "SQL": 20894,
+                "Java": 16424,
+                "Bash/Shell": 12571,
+                "C#":12668,
+                "PHP":10545,
+                "C++":7995
+                            },
+            "Master’s degree (MA, MS, M.Eng., MBA, etc.)": {
+                "JavaScript": 11342,
+                "HTML/CSS": 20949,
+                "Python": 7198,
+                "SQL": 9763,
+                "Java": 8174,
+                "Bash/Shell": 7379,
+                "C#":5646,
+                "PHP":4331,
+                "C++":4648
+            },
+            "Some college/university study without earning a degree": {
+                "JavaScript": 7209,
+                "HTML/CSS": 14031,
+                "Python": 3703,
+                "SQL": 5801,
+                "Java": 3997,
+                "Bash/Shell": 4225,
+                "C#":3473,
+                "PHP":3577,
+                "C++":2439
+            },
+            "Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)": {
+                "JavaScript": 4773,
+                "HTML/CSS": 10034,
+                "Python": 3111,
+                "SQL": 3672,
+                "Java": 3413,
+                "Bash/Shell": 2715,
+                "C#":2298,
+                "PHP":2703,
+                "C++":2398
+            },
+            "Associate degree (A.A., A.S., etc.)": {
+                "JavaScript": 1833,
+                "HTML/CSS": 3606,
+                "Python": 798,
+                "SQL": 1529,
+                "Java": 962,
+                "Bash/Shell": 904,
+                "C#":1020,
+                "PHP":998,
+                "C++":486
+            },
+            "Other doctoral degree (Ph.D, Ed.D., etc.)": {
+                "JavaScript": 872,
+                "HTML/CSS": 1696,
+                "Python": 1213,
+                "SQL": 870,
+                "Java": 666,
+                "Bash/Shell": 1013,
+                "C#":411,
+                "PHP":278,
+                "C++":734
+            },
+            "Primary/elementary school": {
+                "JavaScript": 787,
+                "HTML/CSS": 1696,
+                "Python": 603,
+                "SQL": 467,
+                "Java": 553,
+                "Bash/Shell": 445,
+                "C#":405,
+                "PHP":443,
+                "C++":383
+            },
+            "Professional degree (JD, MD, etc.)": {
+                "JavaScript": 757,
+                "HTML/CSS": 1429,
+                "Python": 330,
+                "SQL": 653,
+                "Java": 499,
+                "Bash/Shell": 378,
+                "C#":392,
+                "PHP":398,
+                "C++":238
+            },
+            "I never completed any formal education": {
+                "JavaScript": 313,
+                "HTML/CSS": 641,
+                "Python": 150,
+                "SQL": 213,
+                "Java": 169,
+                "Bash/Shell": 156,
+                "C#":140,
+                "PHP":197,
+                "C++":121
+            }
+        },
+        "2020": {
+            "Bachelor’s degree (BA, BS, B.Eng., etc.)": {
+                "JavaScript": 17308,
+                "HTML/CSS": 15882,
+                "Python": 10318,
+                "SQL": 14024,
+                "Java": 10009,
+                "Bash/Shell": 7889,
+                "C#":7863,
+                "PHP":6178,
+                "C++":5267
+                            },
+            "Master’s degree (MA, MS, M.Eng., MBA, etc.)": {
+                "JavaScript": 7525,
+                "HTML/CSS": 6661,
+                "Python": 5705,
+                "SQL": 6592,
+                "Java": 4846,
+                "Bash/Shell": 4417,
+                "C#":3521,
+                "PHP":2485,
+                "C++":2921
+            },
+            "Some college/university study without earning a degree": {
+                "JavaScript": 4986,
+                "HTML/CSS": 2898,
+                "Python": 2898,
+                "SQL": 3897,
+                "Java": 2574,
+                "Bash/Shell": 2476,
+                "C#":2265,
+                "PHP":2135,
+                "C++":1646
+            },
+            "Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)": {
+                "JavaScript": 3027,
+                "HTML/CSS": 3160,
+                "Python": 2271,
+                "SQL": 2203,
+                "Java": 2014,
+                "Bash/Shell": 1375,
+                "C#":1517,
+                "PHP":1415,
+                "C++":1444
+            },
+            "Associate degree (A.A., A.S., etc.)": {
+                "JavaScript": 1327,
+                "HTML/CSS": 1257,
+                "Python": 615,
+                "SQL": 1064,
+                "Java": 619,
+                "Bash/Shell": 596,
+                "C#":741,
+                "PHP":638,
+                "C++":305
+            },
+            "Other doctoral degree (Ph.D, Ed.D., etc.)": {
+                "JavaScript": 650,
+                "HTML/CSS": 609,
+                "Python": 1049,
+                "SQL": 629,
+                "Java": 492,
+                "Bash/Shell": 692,
+                "C#":275,
+                "PHP":206,
+                "C++":550
+            },
+            "Primary/elementary school": {
+                "JavaScript": 568,
+                "HTML/CSS": 603,
+                "Python": 484,
+                "SQL": 302,
+                "Java": 345,
+                "Bash/Shell": 254,
+                "C#":279,
+                "PHP":246,
+                "C++":1317
+            },
+            "Professional degree (JD, MD, etc.)": {
+                "JavaScript": 526,
+                "HTML/CSS": 484,
+                "Python": 254,
+                "SQL": 463,
+                "Java": 319,
+                "Bash/Shell": 244,
+                "C#":258,
+                "PHP":270,
+                "C++":132
+            },
+            "I never completed any formal education": {
+                "JavaScript": 278,
+                "HTML/CSS": 259,
+                "Python": 144,
+                "SQL": 183,
+                "Java": 151,
+                "Bash/Shell": 104,
+                "C#":125,
+                "PHP":154,
+                "C++":103
+            }
+        },
+        "2022": {
+            "Bachelor’s degree (BA, BS, B.Eng., etc.)": {
+                "JavaScript": 20311,
+                "HTML/CSS": 16586,
+                "Python": 13232,
+                "SQL": 15571,
+                "Java": 10203,
+                "Bash/Shell": 8133,
+                "C#":8659,
+                "PHP":6058,
+                "C++":5954
+                            },
+            "Master’s degree (MA, MS, M.Eng., MBA, etc.)": {
+                "JavaScript": 8766,
+                "HTML/CSS": 7084,
+                "Python": 7773,
+                "SQL": 7647,
+                "Java": 5170,
+                "Bash/Shell": 4816,
+                "C#":3916,
+                "PHP":2599,
+                "C++":3408
+            },
+            "Some college/university study without earning a degree": {
+                "JavaScript": 6590,
+                "HTML/CSS": 5631,
+                "Python": 4219,
+                "SQL": 4793,
+                "Java": 2901,
+                "Bash/Shell": 2922,
+                "C#":2652,
+                "PHP":2330,
+                "C++":2054
+            },
+            "Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)": {
+                "JavaScript": 5478,
+                "HTML/CSS": 5108,
+                "Python": 4478,
+                "SQL": 3322,
+                "Java": 2872,
+                "Bash/Shell": 2239,
+                "C#":2258,
+                "PHP":1825,
+                "C++":2483
+            },
+            "Associate degree (A.A., A.S., etc.)": {
+                "JavaScript": 1614,
+                "HTML/CSS": 1399,
+                "Python": 867,
+                "SQL": 1273,
+                "Java": 703,
+                "Bash/Shell": 615,
+                "C#":803,
+                "PHP":681,
+                "C++":383
+            },
+            "Other doctoral degree (Ph.D, Ed.D., etc.)": {
+                "JavaScript": 838,
+                "HTML/CSS": 721,
+                "Python": 1495,
+                "SQL": 787,
+                "Java": 456,
+                "Bash/Shell": 846,
+                "C#":315,
+                "PHP":229,
+                "C++":681
+            },
+            "Primary/elementary school": {
+                "JavaScript": 1201,
+                "HTML/CSS": 1146,
+                "Python": 1069,
+                "SQL": 527,
+                "Java": 566,
+                "Bash/Shell": 471,
+                "C#":526,
+                "PHP":380,
+                "C++":552
+            },
+            "Professional degree (JD, MD, etc.)": {
+                "JavaScript": 705,
+                "HTML/CSS": 590,
+                "Python": 408,
+                "SQL": 605,
+                "Java": 334,
+                "Bash/Shell": 248,
+                "C#":296,
+                "PHP":308,
+                "C++":176
+            },
+            "I never completed any formal education": {
+                "JavaScript": 0,
+                "HTML/CSS": 0,
+                "Python": 0,
+                "SQL": 0,
+                "Java": 0,
+                "Bash/Shell": 0,
+                "C#":0,
+                "PHP":0,
+                "C++":0
+            }
+        },
+        "2024": {
+           "Bachelor’s degree (BA, BS, B.Eng., etc.)": {
+                "JavaScript": 15664,
+                "HTML/CSS": 12940,
+                "Python": 11437,
+                "SQL": 12884,
+                "Java": 7260,
+                "Bash/Shell": 7839,
+                "C#":6772,
+                "PHP":0,
+                "C++":4828
+                            },
+            "Master’s degree (MA, MS, M.Eng., MBA, etc.)": {
+                "JavaScript": 8252,
+                "HTML/CSS": 6660,
+                "Python": 8002,
+                "SQL": 7613,
+                "Java": 4581,
+                "Bash/Shell": 5330,
+                "C#":3706,
+                "PHP":0,
+                "C++":3329
+            },
+            "Some college/university study without earning a degree": {
+                "JavaScript": 5074,
+                "HTML/CSS": 4429,
+                "Python": 3586,
+                "SQL": 3959,
+                "Java": 2132,
+                "Bash/Shell": 2760,
+                "C#":2087,
+                "PHP":0,
+                "C++":1776
+            },
+            "Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)": {
+                "JavaScript": 3797,
+                "HTML/CSS": 3609,
+                "Python": 3227,
+                "SQL": 2562,
+                "Java": 1926,
+                "Bash/Shell": 1895,
+                "C#":1624,
+                "PHP":0,
+                "C++":1775
+            },
+            "Associate degree (A.A., A.S., etc.)": {
+                "JavaScript": 1212,
+                "HTML/CSS": 1082,
+                "Python": 732,
+                "SQL": 3959,
+                "Java":487,
+                "Bash/Shell": 530,
+                "C#":644,
+                "PHP":0,
+                "C++":296
+            },
+            "Other doctoral degree (Ph.D, Ed.D., etc.)": {
+                "JavaScript": 0,
+                "HTML/CSS": 0,
+                "Python": 0,
+                "SQL": 0,
+                "Java": 0,
+                "Bash/Shell": 0,
+                "C#":0,
+                "PHP":0,
+                "C++":100
+            },
+            "Primary/elementary school": {
+                "JavaScript": 722,
+                "HTML/CSS": 702,
+                "Python": 667,
+                "SQL": 352,
+                "Java": 327,
+                "Bash/Shell": 352,
+                "C#":310,
+                "PHP":0,
+                "C++":359
+            },
+            "Professional degree (JD, MD, etc.)": {
+                "JavaScript": 1166,
+                "HTML/CSS": 997,
+                "Python": 1864,
+                "SQL": 1140,
+                "Java": 667,
+                "Bash/Shell": 1085,
+                "C#":488,
+                "PHP":0,
+                "C++":891
+            },
+            "I never completed any formal education": {
+                "JavaScript": 0,
+                "HTML/CSS": 0,
+                "Python": 0,
+                "SQL": 0,
+                "Java": 0,
+                "Bash/Shell": 0,
+                "C#":0,
+                "PHP":0,
+                "C++":100
+            }
+        }
+        
+    },
+    "total_ranking_data": null,
+    "linguagens_foco": [
+        "JavaScript",
+        "HTML/CSS",
+        "Python",
+        "SQL",
+        "Java",
+        "Bash/Shell",
+        "C#",
+        "PHP",
+        "C++"
+    ]
+}

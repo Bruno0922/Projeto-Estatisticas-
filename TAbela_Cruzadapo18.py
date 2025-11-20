@@ -1,0 +1,75 @@
+import pandas as pd
+import numpy as np
+
+COL_ESCOLARIDADE = 'FormalEducation'   
+COL_LINGUAGENS = 'LanguageWorkedWith' 
+COL_NOVA_LINGUAGEM = 'Linguagem'
+
+def carregar_e_processar_dados(nome_arquivo_excel, nome_aba, ano):
+    """
+    Carrega o DataFrame, gera a tabulação cruzada bruta e calcula as porcentagens.
+    """
+    print(f"--- Processando dados Stack Overflow {ano} (Aba: {nome_aba}) ---")
+    
+    
+    try:
+       
+        df = pd.read_excel(nome_arquivo_excel, sheet_name=nome_aba)
+    except Exception as e:
+        print(f" ❌ ERRO ao carregar arquivo/aba: {e}")
+        return None, None 
+    
+    
+    df_limpo = df.dropna(subset=[COL_ESCOLARIDADE, COL_LINGUAGENS])
+    print(f"Total de linhas após a remoção de NA para {ano}: {len(df_limpo)}")
+    
+    
+    df_linguagens_separadas = (
+        df_limpo[COL_LINGUAGENS].astype(str).str.split(';', expand=True).stack().reset_index(level=1, drop=True)
+    )
+    df_linguagens_separadas.name = COL_NOVA_LINGUAGEM
+    df_long = df_limpo[[COL_ESCOLARIDADE]].join(df_linguagens_separadas)
+    
+    
+    tabela_bruta = pd.crosstab(
+        index=df_long[COL_ESCOLARIDADE],
+        columns=df_long[COL_NOVA_LINGUAGEM],
+        margins=True,
+        margins_name='Total'
+    )
+    
+    
+    tabela_percentual = pd.crosstab(
+        index=df_long[COL_ESCOLARIDADE],
+        columns=df_long[COL_NOVA_LINGUAGEM],
+        normalize='index' 
+    )
+    
+    tabela_percentual = (tabela_percentual * 100).round(2).astype(str) + '%'
+    
+    
+
+    nome_excel_bruta = f'analise_cruzada_bruta_{ano}.xlsx'
+    tabela_bruta.to_excel(nome_excel_bruta)
+    print(f"✅ Contagem Bruta salva: {nome_excel_bruta}")
+    
+    
+    nome_excel_perc = f'analise_cruzada_percentual_{ano}.xlsx'
+    tabela_percentual.to_excel(nome_excel_perc)
+    print(f"✅ Porcentagem por Escolaridade salva: {nome_excel_perc}")
+    
+    return tabela_bruta, tabela_percentual
+
+
+
+nome_arquivo_excel = "analise_pesquisa_2018_2020.xlsm" 
+
+
+aba_2020 = 0 
+aba_2018 = 0 
+
+
+tabela_bruta_2020, tabela_perc_2020 = carregar_e_processar_dados(nome_arquivo_excel, aba_2020, 2020)
+tabela_bruta_2018, tabela_perc_2018 = carregar_e_processar_dados(nome_arquivo_excel, aba_2018, 2018)
+
+print("\nProcessamento de contagens brutas e porcentagens concluído.")
